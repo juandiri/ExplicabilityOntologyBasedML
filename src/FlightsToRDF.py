@@ -5,17 +5,17 @@ from rdflib import Graph, Literal, BNode, Namespace, URIRef
 from rdflib.namespace import RDF, XSD
 from tqdm import tqdm
 
-ontology_file = 'FlightOntology.owl'
+ontology_file = '../Onto/FlightOntology.owl'
 
-folder = '/home/jdiaz/Knowledge bases TL/Replica/results'
+folder = '../Onto/'
 
-out_file = '../Example'
+out_file = '../SampleRDFInsertion'
 
-csv_file_2010 = 'data/TryData/trydata.csv'
+csv_file_2010 = '../SampleData/SampleFlights.csv'
 
-meteo_file = 'data/TryData/ATL.csv'
+meteo_file = '../SampleData/ATL.csv'
 
-airports_file = 'data/TryData/airports.csv'
+airports_file = '../SampleData/airports.csv'
 
 def add_meteo(meteo_csv_file):
 
