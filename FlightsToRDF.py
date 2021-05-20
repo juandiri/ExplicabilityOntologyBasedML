@@ -74,8 +74,11 @@ def add_departure(dep_csv_file):
 
         # Map to the URI defined in the ontology for each carrier, origin and destination airport
         uri_car = flt[carrier]
+        rdf.add((uri_car, RDF['type'], flt['Carrier']))
         uri_ori = flt[origin]
+        rdf.add((uri_ori, RDF['type'], flt['Airport']))
         uri_dest = flt[destination]
+        rdf.add((uri_dest, RDF['type'], flt['Airport']))
 
         # Add Object Propertities
 
