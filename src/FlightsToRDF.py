@@ -177,8 +177,8 @@ if __name__ == '__main__':
 
 
     print(f"Saved file {out_file}")
-    with open(out_file + '.rdf', 'w+') as f:
-        f.write(rdf.serialize(format='ntriples').decode('utf-8'))
+    with open(out_file + '.xml', 'w+') as f:
+        f.write(rdf.serialize(format='xml').decode('utf-8'))
 
 
 
