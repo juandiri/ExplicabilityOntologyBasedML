@@ -37,7 +37,7 @@ public class PropertiesExample {
         // Ontology Manager
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         // File object
-        File flights_file = new File("/home/jdiaz/Knowledge bases TL/ExplicabilityOntologyBasedML/Onto/FlightOntology.owl");
+        File flights_file = new File("/home/jdiaz/KnowledgeBasesTL/ExplicabilityOntologyBasedML/Onto/FlightOntology.owl");
         // Prepare OWL Ontology classes to store in memory the ontology
         OWLOntology localFlights;
 
