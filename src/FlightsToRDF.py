@@ -54,16 +54,27 @@ def main(ontology_file, flights_dir, weather_dir, airports_file, years,out_folde
             rdf.add((uri_airport, flt['hasWeather'], uri_meteo))
 
             # Add Data Propertities
-            rdf.add((uri_meteo, flt['hasCloudCover'], Literal(row['cloudCover'], datatype=XSD['float'])))
-            rdf.add((uri_meteo, flt['hasDewPoint'], Literal(row['dewPoint'], datatype=XSD['float'])))
-            rdf.add((uri_meteo, flt['hasHumidity'], Literal(row['humidity'], datatype=XSD['float'])))
-            rdf.add((uri_meteo, flt['hasPrecipType'], Literal(row['precipType'], datatype=XSD['string'])))
-            rdf.add((uri_meteo, flt['hasPressure'], Literal(row['pressure'], datatype=XSD['float'])))
-            rdf.add((uri_meteo, flt['hasSummary'], Literal(row['summary'], datatype=XSD['string'])))
-            rdf.add((uri_meteo, flt['hasTemperature'], Literal(row['temperature'], datatype=XSD['float'])))
-            rdf.add((uri_meteo, flt['hasVisibility'], Literal(row['visibility'], datatype=XSD['float'])))
-            rdf.add((uri_meteo, flt['hasWindBearing'], Literal(row['windBearing'], datatype=XSD['float'])))
-            rdf.add((uri_meteo, flt['hasWindSpeed'], Literal(row['windSpeed'], datatype=XSD['float'])))
+            # The check for 'value == value' is made to remove nan values
+            if row['cloudCover'] is not None and row['cloudCover'] == row['cloudCover']:
+                rdf.add((uri_meteo, flt['hasCloudCover'], Literal(row['cloudCover'], datatype=XSD['float'])))
+            if row['dewPoint'] is not None and row['dewPoint'] == row['dewPoint']:
+                rdf.add((uri_meteo, flt['hasDewPoint'], Literal(row['dewPoint'], datatype=XSD['float'])))
+            if row['humidity'] is not None and row['humidity'] == row['humidity']:
+                rdf.add((uri_meteo, flt['hasHumidity'], Literal(row['humidity'], datatype=XSD['float'])))
+            if row['precipType'] is not None and row['precipType'] == row['precipType']:
+                rdf.add((uri_meteo, flt['hasPrecipType'], Literal(row['precipType'], datatype=XSD['string'])))
+            if row['pressure'] is not None and row['pressure'] == row['pressure']:
+                rdf.add((uri_meteo, flt['hasPressure'], Literal(row['pressure'], datatype=XSD['float'])))
+            if row['summary'] is not None and row['summary'] == row['summary']:
+                rdf.add((uri_meteo, flt['hasSummary'], Literal(row['summary'], datatype=XSD['string'])))
+            if row['temperature'] is not None and row['temperature'] == row['temperature']:
+                rdf.add((uri_meteo, flt['hasTemperature'], Literal(row['temperature'], datatype=XSD['float'])))
+            if row['visibility'] is not None and row['visibility'] == row['visibility']:
+                rdf.add((uri_meteo, flt['hasVisibility'], Literal(row['visibility'], datatype=XSD['float'])))
+            if row['windBearing'] is not None and row['windBearing'] == row['windBearing']:
+                rdf.add((uri_meteo, flt['hasWindBearing'], Literal(row['windBearing'], datatype=XSD['float'])))
+            if row['windSpeed'] is not None and row['windSpeed'] == row['windSpeed']:
+                rdf.add((uri_meteo, flt['hasWindSpeed'], Literal(row['windSpeed'], datatype=XSD['float'])))
 
 
     # Auxiliary function that takes a csv file contaning departures data

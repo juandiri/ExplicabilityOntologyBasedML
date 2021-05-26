@@ -6,6 +6,7 @@ import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.*;
+import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.util.DefaultPrefixManager;
 
 import java.io.File;
@@ -13,52 +14,64 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class GetEntailments {
 
     // Directory where the ontologies are contained
-    private static String HOME_DIR = "your home dir";
+    private static String ONTO_DIR = "/home/jdiaz/KnowledgeBasesTL/ExplicabilityOntologyBasedML/RDFInsertions";
     // IRI of the ontology
-    private static String ontoIRI = "http://www.cs.ox.ac.uk/isg/krr/ontologies/FlightOntology-1#";
+    private static String ontoIRI;
+    // Output name according to the query performed
+    public static final String output_name = "DL_ATL_DFW";
     private static String ENT = "Entailments";
     public static OWLOntology localOnto;
+    static OWLReasoner reasoner;
+    static OWLReasonerFactory reasonerFactory;
+    static OWLOntologyManager ontologyManager;
+    static DefaultPrefixManager pm;
 
     // Create the IRI
     IRI location = IRI.create(ontoIRI);
 
     public static void main(String args[]) throws OWLOntologyCreationException, IOException {
         if (args != null && args.length > 1) {
-            HOME_DIR = args[0];
+            ONTO_DIR = args[0];
         }
 
-        File e_f = new File(HOME_DIR, ENT);
+        File e_f = new File(ONTO_DIR, ENT);
         if (!e_f.exists()) {
             e_f.mkdir();
         }
-        ArrayList<String> doms = getFilePaths();
-        for (String dom : doms) {
-            System.out.printf("\n Domain: %s \n\n", dom);
+        ArrayList<String> ontologyFiles = getFilePaths();
+        for (String filePath : ontologyFiles) {
+            System.out.println("Loading file: " + filePath);
+            loadOntology(filePath);
+            ArrayList<OWLNamedIndividual> departures = getDeparturesInstances();
 
-            ArrayList<ArrayList<String>> Gs = getEntClosures(dom, e_f);
+            ArrayList<ArrayList<String>> Gs = getEntClosures(output_name);
 
             ArrayList<String> class_ents = new ArrayList<>();
             ArrayList<String> role_ents = new ArrayList<>();
-            for (ArrayList<String> G : Gs) {
-                for (String g : G) {
-                    if (g.split(",").length == 2 && !class_ents.contains(g)) {
-                        class_ents.add(g);
-                    }
-                    if (g.split(",").length == 3 && !role_ents.contains(g)) {
-                        role_ents.add(g);
+
+            for(OWLNamedIndividual departure : departures){
+                for (ArrayList<String> G : Gs) {
+                    for (String g : G) {
+                        if (g.split(",").length == 2 && !class_ents.contains(g)) {
+                            class_ents.add(g);
+                        }
+                        if (g.split(",").length == 3 && !role_ents.contains(g)) {
+                            role_ents.add(g);
+                        }
                     }
                 }
             }
-            File class_ent_f = new File(e_f.getPath(), String.format("%s_class_ents.csv", dom));
-            File role_ent_f = new File(e_f.getPath(), String.format("%s_role_ents.csv", dom));
 
-            (class_ent_f, class_ents);
+            File class_ent_f = new File(e_f.getPath(), String.format("%s_class_ents.csv", output_name));
+            File role_ent_f = new File(e_f.getPath(), String.format("%s_role_ents.csv", output_name));
+
+            output_ents(class_ent_f, class_ents);
             output_ents(role_ent_f, role_ents);
-
 
             System.out.println("Calculate entailment importance \n");
             HashMap<String, Float> imp = calImportance(Gs);
@@ -70,14 +83,14 @@ public class GetEntailments {
             HashMap<String, Float[]> eff = calEffectiveness(Gs, ents);
 
 
-            File imp_f = new File(e_f.getPath(), String.format("%s_imp.csv", dom));
+            File imp_f = new File(e_f.getPath(), String.format("%s_imp.csv", output_name));
             FileWriter imp_writer = new FileWriter(imp_f.getPath());
             for (String g : imp.keySet()) {
                 imp_writer.write(String.format("%s:%f\n", g, imp.get(g)));
             }
             imp_writer.close();
 
-            File eff_f = new File(e_f.getPath(), String.format("%s_eff.csv", dom));
+            File eff_f = new File(e_f.getPath(), String.format("%s_eff.csv", output_name));
             FileWriter eff_writer = new FileWriter(eff_f.getPath());
             for (String g : eff.keySet()) {
                 Float[] e = eff.get(g);
@@ -86,36 +99,57 @@ public class GetEntailments {
         }
     }
 
-    public OWLOntology loadOntology(String ontology_filepath) throws OWLOntologyCreationException{
+    public static void loadOntology(String ontology_filepath) throws OWLOntologyCreationException{
 
-        IRI location = IRI.create("http://www.cs.ox.ac.uk/isg/krr/ontologies/FlightOntology-1#");
         // Ontology Manager
-        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+        ontologyManager = OWLManager.createOWLOntologyManager();
         // Create File object for the ontology
         File ontology_file = new File(ontology_filepath);
         // Prepare OWL Ontology classes to store in memory
         OWLOntology localOntology;
         // Load Ontology from file
-        return localOntology = manager.loadOntologyFromOntologyDocument(ontology_file);
-    }
-
-    public ArrayList<String> getEntClosure() {
-
-        ArrayList<String> G = new ArrayList<>();
+        localOnto = ontologyManager.loadOntologyFromOntologyDocument(ontology_file);
 
         // Get and configure HermiT reasoner
-        OWLReasonerFactory reasonerFactory = new ReasonerFactory();
-
+        reasonerFactory = new ReasonerFactory();
         // Configure console process monitor
         ConsoleProgressMonitor progressMonitor = new ConsoleProgressMonitor();
         // Load default configuration for the reasoner
         OWLReasonerConfiguration config = new SimpleConfiguration(progressMonitor);
 
         // Create Reasoner Instance, classify the ontology and compute inferences
-        OWLReasoner reasoner = reasonerFactory.createReasoner(localOnto, config);
+        reasoner = reasonerFactory.createReasoner(localOnto, config);
 
-        OWLNamedIndividual[] S = localOnto.individualsInSignature().toArray(OWLNamedIndividual[]::new);
-        OWLObjectProperty[] OP = localOnto.objectPropertiesInSignature().toArray(OWLObjectProperty[]::new);
+        // Default Prefix Manager
+        pm = new DefaultPrefixManager(null,null,"http://www.cs.ox.ac.uk/isg/krr/ontologies/FlightOntology-1#");
+    }
+
+    public static ArrayList<OWLNamedIndividual> getDeparturesInstances(){
+        ArrayList<OWLNamedIndividual> departuresInstances = null;
+        // Get all the airports
+        OWLDataFactory fac = ontologyManager.getOWLDataFactory();
+        // Create IRI for the class "Departure"
+        OWLClass airports = fac.getOWLClass(IRI.create(pm.getDefaultPrefix(), "Departure"));
+        // Get Individuals for this class
+        NodeSet<OWLNamedIndividual> departureNodeSet = reasoner.getInstances(airports, false);
+        // Transform NodeSet into a Set
+        Set<OWLNamedIndividual> departureSet = departureNodeSet.getFlattened();
+        // Print individuals
+        for (OWLNamedIndividual departure : departureSet) {
+            System.out.println("Departure:" + pm.getShortForm(departure));
+            departuresInstances.add(departure);
+        }
+        return departuresInstances;
+    }
+
+    public static ArrayList<String> getEntClosure(OWLNamedIndividual i) {
+
+        ArrayList<String> G = new ArrayList<>();
+
+        //Get all the individuals which are referenced in the ontology
+        OWLNamedIndividual[] S = i.individualsInSignature().toArray(OWLNamedIndividual[]::new);
+        //Get all the object properties which are referenced in the ontology
+        OWLObjectProperty[] OP = i.objectPropertiesInSignature().toArray(OWLObjectProperty[]::new);
 
         for (OWLNamedIndividual individual:S) {
             for (OWLObjectProperty objectProperty: OP) {
@@ -132,7 +166,7 @@ public class GetEntailments {
                 }
             }
         }
-        for (OWLClass c : localOnto.classesInSignature().toArray(OWLClass[]::new)){
+        for (OWLClass c : i.classesInSignature().toArray(OWLClass[]::new)){
             NodeSet<OWLNamedIndividual> individualsSet = reasoner.getInstances(c,false);
             OWLNamedIndividual[] individualsArray = individualsSet.entities().toArray(OWLNamedIndividual[]::new);
             for (OWLNamedIndividual individual: individualsArray) {
@@ -201,7 +235,7 @@ public class GetEntailments {
     }
 
     private static ArrayList<String> getFilesNames() {
-        File directoryPath = new File(HOME_DIR);
+        File directoryPath = new File(ONTO_DIR);
         ArrayList<String> filesList = new ArrayList<>();
         for (File f : directoryPath.listFiles()) {
             String name = f.getName();
@@ -214,33 +248,30 @@ public class GetEntailments {
 
     private static ArrayList<String> getFilePaths() {
 
-        File d_file = new File(HOME_DIR);
+        File d_file = new File(ONTO_DIR);
         ArrayList<String> paths = new ArrayList<>();
         for (File f : d_file.listFiles()) {
-            if (! f.getAbsolutePath().endsWith(".owl")) {
+            if (f.getAbsolutePath().endsWith(".owl")) {
+                System.out.println("OWL File added:" + f);
                 paths.add(f.getAbsolutePath());
             }
         }
         return paths;
     }
 
-    public ArrayList<ArrayList<String>> getEntClosures(String out_dir, String e_f) throws OWLOntologyCreationException, IOException {
+    public static ArrayList<ArrayList<String>> getEntClosures(String out_dir) throws OWLOntologyCreationException, IOException {
 
         ArrayList<ArrayList<String>> Gs = new ArrayList<>();
         // Create file to write output
-        File ent_num_f = new File(e_f, String.format("%s/ent_num.csv", out_dir));
+        File ent_num_f = new File(out_dir+ output_name);
+        // Creater writer
+        FileWriter writer = new FileWriter(ent_num_f.getPath());
         // Create File object for the directory
-        ArrayList<String> filesInDirectory = getFilePaths();
-        // List of all files and directories
-        ArrayList<String> fileNames = getFilesNames();
-        for (String f : filesInDirectory){
-            OWLOntology ontologyFile = loadOntology(f);
-            ArrayList<String> G = getEntClosure();
+        ArrayList<OWLNamedIndividual> departuresIntances = getDeparturesInstances();
+        for (OWLNamedIndividual i : departuresIntances){
+            ArrayList<String> G = getEntClosure(i);
             Gs.add(G);
-            writer.write(String.format("%s,%d\n", snp_ids.get(i), G.size()));
-            if (i % 100 == 0) {
-                System.out.printf("%d: %s, %d \n", i, snp_ids.get(i), G.size());
-            }
+            writer.write(String.format("%s,%d\n", i.getIRI().getFragment(), G.size()));
             writer.close();
 
 
