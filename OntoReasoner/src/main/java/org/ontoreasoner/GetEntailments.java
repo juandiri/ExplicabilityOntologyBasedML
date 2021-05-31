@@ -36,18 +36,21 @@ public class GetEntailments {
             ONTO_DIR = args[0];
         }
 
+        // Create directory to store entailments
         File e_f = new File(ONTO_DIR, ENT);
         if (!e_f.exists()) {
             e_f.mkdir();
         }
 
-        System.out.println("Files to read " + getFilePaths());
-        System.out.println("Names of files " + getFilesNames());
+        // Calculating the set of entailments closures
         ArrayList<ArrayList<String>> Gs = getEntClosures(e_f.getPath());
 
+        // ArrayList to store the class and role entailments
         ArrayList<String> class_ents = new ArrayList<>();
         ArrayList<String> role_ents = new ArrayList<>();
 
+
+        // For each entailment closure, add the class and role entailments
         for (ArrayList<String> G : Gs) {
             for (String g : G) {
                 if (g.split(",").length == 2 && !class_ents.contains(g)) {
@@ -59,23 +62,26 @@ public class GetEntailments {
             }
         }
 
-
+        // Output files
         File class_ent_f = new File(e_f.getPath(), String.format("%s_class_ents.csv", output_name));
         File role_ent_f = new File(e_f.getPath(), String.format("%s_role_ents.csv", output_name));
 
+        // Writing the class and roles entailments
         output_ents(class_ent_f, class_ents);
         output_ents(role_ent_f, role_ents);
 
+        // Calculate the entailment importance
         System.out.println("Calculate entailment importance \n");
         HashMap<String, Float> imp = calImportance(Gs);
 
+        // Calculate the effectiveness of the class and role entailments
         System.out.println("Calculate entailment effectiveness \n");
         ArrayList<String> ents = new ArrayList<>();
         ents.addAll(class_ents);
         ents.addAll(role_ents);
         HashMap<String, Float[]> eff = calEffectiveness(Gs, ents);
 
-
+        // Write previous results into file
         File imp_f = new File(e_f.getPath(), String.format("%s_imp.csv", output_name));
         FileWriter imp_writer = new FileWriter(imp_f.getPath());
         for (String g : imp.keySet()) {
@@ -91,6 +97,8 @@ public class GetEntailments {
         }
     }
 
+    // Method that takes a File Path and Load the ontology and set needed variables
+    // to perform the reasoning
     public static void loadOntology(String ontology_filepath) throws OWLOntologyCreationException{
 
         // Ontology Manager
@@ -126,6 +134,8 @@ public class GetEntailments {
 //        return departuresInstances;
 //    }
 
+
+    // Method that takes and ontology an calculate its entailment closure
     public static ArrayList<String> getEntClosure(OWLOntology onto) {
 
         // Configure console process monitor
@@ -136,6 +146,7 @@ public class GetEntailments {
         // Create Reasoner Instance, classify the ontology and compute inferences
         reasoner = reasonerFactory.createReasoner(onto, config);
 
+        // ArrayList to store entailments
         ArrayList<String> G = new ArrayList<>();
 
         //Get all the individuals which are referenced in the ontology
@@ -143,12 +154,13 @@ public class GetEntailments {
         //Get all the object properties which are referenced in the ontology
         OWLObjectProperty[] OP = onto.objectPropertiesInSignature().toArray(OWLObjectProperty[]::new);
 
-        // Calculate the entailments for each individual in the ontology
+        // Calculate the entailments for each individual with its object properties
         for (OWLNamedIndividual individual:S) {
             for (OWLObjectProperty objectProperty: OP) {
                 if (objectProperty.getIRI().equals("topObjectProperty")){
                     continue;
                 }
+                // Reason the object property values for each individual and store them
                 NodeSet<OWLNamedIndividual> individualValues = reasoner.getObjectPropertyValues(individual,objectProperty);
                 OWLNamedIndividual[] O = individualValues.entities().toArray(OWLNamedIndividual[]::new);
                 if (O.length > 0){
@@ -167,6 +179,7 @@ public class GetEntailments {
                 }
             }
         }
+        // For each class, reason the individuals and store them
         for (OWLClass c : onto.classesInSignature().toArray(OWLClass[]::new)){
             NodeSet<OWLNamedIndividual> individualsSet = reasoner.getInstances(c,false);
             OWLNamedIndividual[] individualsArray = individualsSet.entities().toArray(OWLNamedIndividual[]::new);
@@ -180,7 +193,9 @@ public class GetEntailments {
 
     // Calculate the Effective Entailments
     private static HashMap<String, Float[]> calEffectiveness(ArrayList<ArrayList<String>> Gs, ArrayList<String> ents) {
+        // Target entailment
         String g_t = "DepDelayed,dep";
+        // Create hash map to store entailments that co-exist and in-exist
         HashMap<String, Integer> co_ex = new HashMap<>();
         HashMap<String, Integer> co_inex = new HashMap<>();
 
@@ -189,6 +204,8 @@ public class GetEntailments {
             co_inex.put(g, 0);
         }
 
+        // For each entailment in each entailment closure, add one if both entailments
+        // co-exist (in-exist) in both the learning domain and the target domain
         for (ArrayList<String> G : Gs) {
             for (String g : co_ex.keySet()) {
                 if (G.contains(g) && G.contains(g_t)) {
@@ -200,6 +217,8 @@ public class GetEntailments {
             }
         }
 
+        // For each effective entailment we calculate its rate w.r.t the cardinality of
+        // the set of entailment closures
         int n = Gs.size();
         HashMap<String, Float[]> eff = new HashMap<>();
         for (String g : co_ex.keySet()) {
@@ -213,7 +232,10 @@ public class GetEntailments {
 
     // Calculate the Importance Entailments
     private static HashMap<String, Float> calImportance(ArrayList<ArrayList<String>> Gs) {
+        // Create hash map to store the importance of the entailments
         HashMap<String, Float> imp = new HashMap<>();
+        // For each entailment in each entailment closure, first set them to one and add one each
+        // time the entailment appears
         for (ArrayList<String> G : Gs) {
             for (String g : G) {
                 if (!imp.containsKey(g)) {
@@ -223,13 +245,16 @@ public class GetEntailments {
                 }
             }
         }
+        // Calculate the rate of importance of each entailment w.r.t the cardinality
+        // of the set of entailment closures
         for (String g : imp.keySet()) {
             imp.put(g, imp.get(g) / (float) Gs.size());
         }
         return imp;
     }
 
-    // File Writer to store the entailments
+    // Method that takes an output file and write in them the given
+    // ArrayList of entailments
     private static void output_ents(File f, ArrayList<String> ents) throws IOException {
         FileWriter writer = new FileWriter(f.getPath());
         for (String g : ents) {
@@ -265,7 +290,7 @@ public class GetEntailments {
         return paths;
     }
 
-    // Method that calculates and store the entailment closure for several ontologies
+    // Method that calculates and store set of the entailment closure for the several ontologies
     public static ArrayList<ArrayList<String>> getEntClosures(String out_dir) throws OWLOntologyCreationException, IOException {
 
         ArrayList<ArrayList<String>> Gs = new ArrayList<>();
@@ -277,6 +302,7 @@ public class GetEntailments {
         ArrayList<String> ontologiesForReasoning = getFilePaths();
         ArrayList<String> ontologiesFileNames = getFilesNames();
         System.out.println("Reasoning files "+ ontologiesFileNames);
+        // For each ontology file calculate the entailment closure and add them
         for (int i = 0; i < getFilePaths().size(); i++){
             loadOntology(ontologiesForReasoning.get(i));
             ArrayList<String> G = getEntClosure(localOnto);
