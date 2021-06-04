@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/juandiri/Desktop/ExplicabilityOntologyBasedML/SampleData/dataXY/DL_ATL_DFW_1500_1759/CNN.ckpt"
+all_model_checkpoint_paths: "/home/juandiri/Desktop/ExplicabilityOntologyBasedML/SampleData/dataXY/DL_ATL_DFW_1500_1759/CNN.ckpt"

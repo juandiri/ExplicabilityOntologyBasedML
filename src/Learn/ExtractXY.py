@@ -224,7 +224,11 @@ def main(flights_dir, weather_dir, out_dir, carrier, origin, destination, start_
             filtered_or = recents_by_carrier_at_origin.loc[(recents_by_carrier_at_origin['FL_DATE'] == date)]
             values = filtered_or['DEP_DELAY'].values
             for ft_idx in range(len(carrier_origin_features)):
-                matrix_dataframe.loc[date, f"{carrier_origin_features[ft_idx]}"] = values[ft_idx]
+                try:
+                    matrix_dataframe.loc[date, f"{carrier_origin_features[ft_idx]}"] = values[ft_idx]
+                except:
+                    matrix_dataframe.loc[date, f"{carrier_origin_features[ft_idx]}"] = 1440
+
 
     # ======== Add data about recent flights by same carrier =======#
 
