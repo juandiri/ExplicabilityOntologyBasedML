@@ -19,19 +19,29 @@ import java.util.Set;
 public class GetEntailments {
 
     // Directory where the ontologies are contained
-    private static String ONTO_DIR = "/home/juandiri/Desktop/ExplicabilityOntologyBasedML/RDFInsertions";
+    private static String ONTO_DIR = "/home/juandiri/TFM/TFM/RDFInsertions/3";
     // IRI of the ontology
-    private static String ontoIRI = "http://www.cs.ox.ac.uk/isg/krr/ontologies/FlightOntology-1#";
+    private static String ontoIRI = "http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#";
     // Output name according to the query performed
-    public static final String output_name = "DL_ATL_DFW";
+    public static String output_name;
     private static String ENT = "Entailments";
     public static OWLOntology localOnto;
     static OWLReasoner reasoner;
     static OWLReasonerFactory reasonerFactory;
     static OWLOntologyManager ontologyManager;
     static DefaultPrefixManager pm;
+    static ArrayList<String> domains = new ArrayList<String>();
+
+
 
     public static void main(String args[]) throws OWLOntologyCreationException, IOException {
+
+        // Adding the different domains
+        domains.add("Cleveland");
+        domains.add("Hungary");
+        domains.add("LongBeach");
+        domains.add("Switzerland");
+
         if (args != null && args.length > 1) {
             ONTO_DIR = args[0];
         }
@@ -42,60 +52,65 @@ public class GetEntailments {
             e_f.mkdir();
         }
 
-        // Calculating the set of entailments closures
-        ArrayList<ArrayList<String>> Gs = getEntClosures(e_f.getPath());
+        for(String dom: domains) {
+            ArrayList<ArrayList<String>> Gs = getEntClosures(dom, e_f.getPath());
 
-        // ArrayList to store the class and role entailments
-        ArrayList<String> class_ents = new ArrayList<>();
-        ArrayList<String> role_ents = new ArrayList<>();
+            // ArrayList to store the class and role entailments
+            ArrayList<String> class_ents = new ArrayList<>();
+            ArrayList<String> role_ents = new ArrayList<>();
 
 
-        // For each entailment closure, add the class and role entailments
-        for (ArrayList<String> G : Gs) {
-            for (String g : G) {
-                if (g.split(",").length == 2 && !class_ents.contains(g)) {
-                    class_ents.add(g);
+            // For each entailment closure, add the class and role entailments
+            for (ArrayList<String> G : Gs) {
+                for (String g : G) {
+                    if (g.split(",").length == 2 && !class_ents.contains(g)) {
+                        class_ents.add(g);
+                    }
+                    if (g.split(",").length == 3 && !role_ents.contains(g)) {
+                        role_ents.add(g);
+                    }
                 }
-                if (g.split(",").length == 3 && !role_ents.contains(g)) {
-                    role_ents.add(g);
+            }
+
+            // Output files
+            File class_ent_f = new File(e_f.getPath(), String.format("%s_class_ents.csv", dom));
+            File role_ent_f = new File(e_f.getPath(), String.format("%s_role_ents.csv", dom));
+
+            // Writing the class and roles entailments
+            output_ents(class_ent_f, class_ents);
+            output_ents(role_ent_f, role_ents);
+
+            // Calculate the entailment importance
+            System.out.println("Calculate entailment importance \n");
+            HashMap<String, Float> imp = calImportance(Gs);
+
+            // Calculate the effectiveness of the class and role entailments
+            System.out.println("Calculate entailment effectiveness \n");
+            ArrayList<String> ents = new ArrayList<>();
+            ents.addAll(class_ents);
+            ents.addAll(role_ents);
+            HashMap<String, Float[]> eff = calEffectiveness(Gs, ents);
+
+            // Write previous results into file
+            File imp_f = new File(e_f.getPath(), String.format("%s_imp.csv", dom));
+            FileWriter imp_writer = new FileWriter(imp_f.getPath());
+            for (String g : imp.keySet()) {
+                imp_writer.write(String.format("%s:%f\n", g, imp.get(g)));
+            }
+            imp_writer.close();
+
+            File eff_f = new File(e_f.getPath(), String.format("%s_eff.csv", dom));
+            FileWriter eff_writer = new FileWriter(eff_f.getPath());
+            for (String g : eff.keySet()) {
+                Float[] e = eff.get(g);
+                eff_writer.write(String.format("%s:%f,%f,%f\n", g, e[0], e[1], e[2]));
                 }
             }
         }
 
-        // Output files
-        File class_ent_f = new File(e_f.getPath(), String.format("%s_class_ents.csv", output_name));
-        File role_ent_f = new File(e_f.getPath(), String.format("%s_role_ents.csv", output_name));
 
-        // Writing the class and roles entailments
-        output_ents(class_ent_f, class_ents);
-        output_ents(role_ent_f, role_ents);
+        // Calculating the set of entailments closures
 
-        // Calculate the entailment importance
-        System.out.println("Calculate entailment importance \n");
-        HashMap<String, Float> imp = calImportance(Gs);
-
-        // Calculate the effectiveness of the class and role entailments
-        System.out.println("Calculate entailment effectiveness \n");
-        ArrayList<String> ents = new ArrayList<>();
-        ents.addAll(class_ents);
-        ents.addAll(role_ents);
-        HashMap<String, Float[]> eff = calEffectiveness(Gs, ents);
-
-        // Write previous results into file
-        File imp_f = new File(e_f.getPath(), String.format("%s_imp.csv", output_name));
-        FileWriter imp_writer = new FileWriter(imp_f.getPath());
-        for (String g : imp.keySet()) {
-            imp_writer.write(String.format("%s:%f\n", g, imp.get(g)));
-        }
-        imp_writer.close();
-
-        File eff_f = new File(e_f.getPath(), String.format("%s_eff.csv", output_name));
-        FileWriter eff_writer = new FileWriter(eff_f.getPath());
-        for (String g : eff.keySet()) {
-            Float[] e = eff.get(g);
-            eff_writer.write(String.format("%s:%f,%f,%f\n", g, e[0], e[1], e[2]));
-        }
-    }
 
     // Method that takes a File Path and Load the ontology and set needed variables
     // to perform the reasoning
@@ -113,27 +128,8 @@ public class GetEntailments {
         // Get and configure HermiT reasoner
         reasonerFactory = new ReasonerFactory();
         // Default Prefix Manager
-        pm = new DefaultPrefixManager(null,null,"http://www.cs.ox.ac.uk/isg/krr/ontologies/FlightOntology-1#");
+        pm = new DefaultPrefixManager(null,null,"http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#");
     }
-
-//    public static ArrayList<OWLNamedIndividual> getDeparturesInstances(){
-//        ArrayList<OWLNamedIndividual> departuresInstances = null;
-//        // Get all the airports
-//        OWLDataFactory fac = ontologyManager.getOWLDataFactory();
-//        // Create IRI for the class "Departure"
-//        OWLClass airports = fac.getOWLClass(IRI.create(pm.getDefaultPrefix(), "Departure"));
-//        // Get Individuals for this class
-//        NodeSet<OWLNamedIndividual> departureNodeSet = reasoner.getInstances(airports, false);
-//        // Transform NodeSet into a Set
-//        Set<OWLNamedIndividual> departureSet = departureNodeSet.getFlattened();
-//        // Print individuals
-//        for (OWLNamedIndividual departure : departureSet) {
-//            System.out.println("Departure:" + pm.getShortForm(departure));
-//            departuresInstances.add(departure);
-//        }
-//        return departuresInstances;
-//    }
-
 
     // Method that takes and ontology an calculate its entailment closure
     public static ArrayList<String> getEntClosure(OWLOntology onto) {
@@ -194,7 +190,7 @@ public class GetEntailments {
     // Calculate the Effective Entailments
     private static HashMap<String, Float[]> calEffectiveness(ArrayList<ArrayList<String>> Gs, ArrayList<String> ents) {
         // Target entailment
-        String g_t = "DepDelayed,dep";
+        String g_t = "HeartDiseaseDiagnosis";
         // Create hash map to store entailments that co-exist and in-exist
         HashMap<String, Integer> co_ex = new HashMap<>();
         HashMap<String, Integer> co_inex = new HashMap<>();
@@ -264,12 +260,12 @@ public class GetEntailments {
     }
 
     // Method that get the names of the files in the ontology directory
-    private static ArrayList<String> getFilesNames() {
+    private static ArrayList<String> getFilesNames(String domain) {
         File directoryPath = new File(ONTO_DIR);
         ArrayList<String> filesList = new ArrayList<>();
         for (File f : directoryPath.listFiles()) {
             String name = f.getName();
-            if (name.endsWith(".owl")) {
+            if (name.endsWith(".owl") && f.getName().contains(domain)) {
                 filesList.add(name.split(".owl")[0]);
             }
         }
@@ -277,12 +273,12 @@ public class GetEntailments {
     }
 
     // Method that get the paths of the files in the ontology directory
-    private static ArrayList<String> getFilePaths() {
+    private static ArrayList<String> getFilePaths(String domain) {
 
         File d_file = new File(ONTO_DIR);
         ArrayList<String> paths = new ArrayList<>();
         for (File f : d_file.listFiles()) {
-            if (f.getAbsolutePath().endsWith(".owl")) {
+            if (f.getAbsolutePath().endsWith(".owl") && f.getName().contains(domain)) {
                 System.out.println("OWL File added:" + f);
                 paths.add(f.getAbsolutePath());
             }
@@ -291,7 +287,7 @@ public class GetEntailments {
     }
 
     // Method that calculates and store set of the entailment closure for the several ontologies
-    public static ArrayList<ArrayList<String>> getEntClosures(String out_dir) throws OWLOntologyCreationException, IOException {
+    public static ArrayList<ArrayList<String>> getEntClosures(String domain, String out_dir) throws OWLOntologyCreationException, IOException {
 
         ArrayList<ArrayList<String>> Gs = new ArrayList<>();
         // Create file to write output
@@ -299,18 +295,18 @@ public class GetEntailments {
         // Creater writer
         FileWriter writer = new FileWriter(ent_num_f.getPath());
         // Create File object for the directory
-        ArrayList<String> ontologiesForReasoning = getFilePaths();
-        ArrayList<String> ontologiesFileNames = getFilesNames();
+        ArrayList<String> ontologiesForReasoning = getFilePaths(domain);
+        ArrayList<String> ontologiesFileNames = getFilesNames(domain);
+
         System.out.println("Reasoning files "+ ontologiesFileNames);
         // For each ontology file calculate the entailment closure and add them
-        for (int i = 0; i < getFilePaths().size(); i++){
+        for (int i = 0; i < getFilePaths(domain).size(); i++){
             loadOntology(ontologiesForReasoning.get(i));
             ArrayList<String> G = getEntClosure(localOnto);
             Gs.add(G);
             writer.write(String.format("%s,%d\n", ontologiesFileNames.get(i), G.size()));
-            writer.close();
-
         }
+        writer.close();
 
         return Gs;
     }

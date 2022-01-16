@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:hrt="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasHeartDiseaseDiagnosis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#HeartDiseaseDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#YearlyCardiacCath">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ECGContains">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Betablocker"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CalciumChannelBrocker"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DailyReading"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Digitalis"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Diuretics"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseDuration"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseHeightAtPeak"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedAngina"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedHypotension"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseMaximumHeartRate"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExercisePeakBloodPressure1"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExercisePeakBloodPressure2"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseRestingBloodPressure"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseRestingHeartRate"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#METSTestScore"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#MonthlyReading"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Nitrates"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#STDepression"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#YearlyReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ProximalRightAnteriorDescendingArtery">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#InducedAngina">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedAngina"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosisContains">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Circumflex"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DistalLeftAnteriorDescendingArtery"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DistalRightAnteriorDescendingArtery"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#LeftMainTruck"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ProximalLeftAnteriorDescendingArtery"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ProximalRightAnteriorDescendingArtery"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exdur_8.0">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseDuration"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedAngina"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasCholesterol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Cholesterol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#UsedCalciumChannelBrocker">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CalciumChannelBrocker"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#bv_patient_1095">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Noughton">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Diuretics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#MonthlyReading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ecg_patient_1095">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exdur_8.0"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotInducedAngina"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NonInducedHypotension"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#stdep_0.0"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exmo_2"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exday_12"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exyr_86"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#mets_3"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exmaxhr_150"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exmaxhr_105"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#expeakbp1_200"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#expeakbp2_95"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exrestbp_90"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#expeakheight_8"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedBetablocker"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedNitrates"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedCalciumChannelBlocker"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedDiuretics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedNitrates">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Nitrates"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NonInducedSTDepression">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#STDepression"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Balke">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#patient_1095">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <hrt:hasAge rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#age_55"/>
+    <hrt:hasSex rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Male"/>
+    <hrt:hasChestPainType rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#AtypicalAngina"/>
+    <hrt:hasRestingSystolicBloodPressure rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#rbp_140"/>
+    <hrt:hasHypertension rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Hypertensive"/>
+    <hrt:hasCholesterol rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#chol_196"/>
+    <hrt:hasFastingBloodSugar rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Lower120mg/dl"/>
+    <hrt:hasExerciseProtocol rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ArmErgometer"/>
+    <hrt:hasExerciseECGReading rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ecg_patient_1095"/>
+    <hrt:hasHeartDiseaseDiagnosis rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#LessThan50DiameterNarrowing"/>
+    <hrt:hasCoronaryAngiogramsDiagnosis rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ca_patient_1095"/>
+    <hrt:hasBloodVesselsDiagnosis rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#bv_patient_1095"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#FastBalke">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Higher120mg/dl">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#FastingBloodSugar"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseRestingBloodPressure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExercisePeakBloodPressure2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Circumflex">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasFastingBloodSugar">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#FastingBloodSugar"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ChestPainType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exmo_2">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#MonthlyReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#UsedDigitalis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Digitalis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CalciumChannelBrocker">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedCalciumChannelBrocker">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CalciumChannelBrocker"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasAge">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Age"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasSex">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Sex"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExercisePeakBloodPressure1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Bike125kpa/min">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Age">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#InducedSTDepression">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#STDepression"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Digitalis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NonInducedHypotension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedHypotension"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedHypoyension"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedAngina">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#TypicalAngina">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ChestPainType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedHypotension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Hypertensive">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Hypertension"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exyr_86">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#YearlyReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedDiuretics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Diuretics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasChestPainType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ChestPainType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#UsedDiuretics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Diuretics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedSTDepression">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Lower120mg/dl">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#FastingBloodSugar"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#YearlyReading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#cday_17">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DailyCardiacCath"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#InducedHypotension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedHypotension"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NonHypertensive">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Hypertension"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exmaxhr_105">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseRestingHeartRate"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseMaximumHeartRate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Bike100kpa/min">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasRestingSystolicBloodPressure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#RestingSystolicBloodPressure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DistalRightAnteriorDescendingArtery">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#cayr_86">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#YearlyCardiacCath"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedDigitalis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Digitalis"/>
+    <hrt:ECGcontains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedDigitalis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#MoreThan50DiameterNarrowing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#HeartDiseaseDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotInducedAngina">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedAngina"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#chol_196">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Cholesterol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DistalLeftAnteriorDescendingArtery">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedCalciumChannelBlocker">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CalciumChannelBlocker"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Asymptomatic">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ChestPainType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasExerciseProtocol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#AtypicalAngina">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ChestPainType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Bike50kpa/min">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Betablocker">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NonAnginaPain">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ChestPainType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ArmErgometer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Male">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Sex"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#camo_2">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#MonthlyCardiacCath"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ca_patient_1095">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis"/>
+    <hrt:CoronaryAngiogramsContains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#camo_2"/>
+    <hrt:CoronaryAngiogramsContains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#cday_17"/>
+    <hrt:CoronaryAngiogramsContains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#cayr_86"/>
+    <hrt:CoronaryAngiogramsContains rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#LessThan50DiameterNarrowing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseRestingHeartRate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasExerciseECGReading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#stdep_0.0">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseInducedSTDepression"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#FastingBloodSugar">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Bruce">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Nitrates">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#LeftMainTruck">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#STDepression">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#MonthlyCardiacCath">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsContains">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DailyCardiacCath"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#HeartDiseaseDiagnosis"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#MonthlyCardiacCath"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#YearlyCardiacCath"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#UsedBetablocker">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Betablocker"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Kottus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseHeightAtPeak">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DailyCardiacCath">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#McHenry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseDuration">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Bike75kpa/min">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Sex">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#expeakbp2_95">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExercisePeakBloodPressure2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#expeakbp1_200">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExercisePeakBloodPressure1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#HeartDiseaseDiagnosis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasCoronaryAngiogramsDiagnosis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#CoronaryAngiogramsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#expeakheight_8">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseHeightAtPeak"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#mets_3">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#METSTestScore"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exmaxhr_150">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseMaximumHeartRate"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#NotUsedBetablocker">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Betablocker"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Bike150kpa/min">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseProtocol"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#METSTestScore">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasHypertension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Hypertension"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DailyReading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseECGReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#LessThan50DiameterNarrowing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#HeartDiseaseDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#hasBloodVesselsDiagnosis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Patient"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exday_12">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#DailyReading"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Female">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Sex"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#exrestbp_90">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ExerciseRestingBloodPressure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#UsedNitrates">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Nitrates"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#ProximalLeftAnteriorDescendingArtery">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#BloodVesselsDiagnosis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Cholesterol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#rbp_140">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#RestingSystolicBloodPressure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#RestingSystolicBloodPressure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Hypertension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#age_55">
+    <rdf:type rdf:resource="http://www.semanticweb.org/juandiri/ontologies/2021/9/untitled-ontology-7#Age"/>
+  </rdf:Description>
+</rdf:RDF>
