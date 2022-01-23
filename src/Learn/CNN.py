@@ -1,10 +1,14 @@
-import numpy as np
 import time
 import os
 import sys
 
+import numpy as np
 import pandas as pd
+
 from sklearn import metrics
+
+from sklearn.preprocessing import label_binarize
+
 
 #libraries
 import tensorflow.compat.v1 as tf
@@ -80,20 +84,29 @@ def learn_rep(Tr_X, Tr_Y, Te_X, Te_Y, Out_Dir):
             train_step.run(session=sess, feed_dict={X_: Tr_X[ran].reshape(Tr_X[ran].shape + (1, 1)), Y_: Tr_Y[ran],
                                                     keep_prob: DROPOUT_PROB})
             if e % 100 == 0 or e == EPOCH_NUM - 1:
+                
                 tr_label_p, tr_score_p = sess.run([tf.argmax(input=y_conv, axis=1), tf.nn.softmax(y_conv)[:, 1]],
                                                   feed_dict={X_: Tr_X.reshape(Tr_X.shape + (1, 1)), Y_: Tr_Y,
                                                              keep_prob: DROPOUT_PROB})
                 tr_label = np.argmax(Tr_Y, 1)
-                tr_acc, tr_auc = metrics.accuracy_score(tr_label, tr_label_p), metrics.roc_auc_score(tr_label,
-                                                                                                     tr_score_p)
+            
+                tr_acc = metrics.accuracy_score(tr_label, tr_label_p)
+
+                tr_auc = metrics.roc_auc_score(label_binarize(tr_label, classes=[0,1,2]),label_binarize(tr_label_p, classes=[0,1,2]), average='macro', multi_class='ovo')
+
+                #tr_auc = metrics.roc_curve(tr_label, tr_score_p)
+                
+                
+                #tr_auc = metrics.roc_auc_score(np.array(list(tr_label)), np.array(list(tr_score_p)), average ='macro', multi_class='ovo')                                                                  
                 print('epoch %d, training accuracy: %f, AUC: %f' % (e, tr_acc, tr_auc))
 
                 te_label_p, te_score_p = sess.run([tf.argmax(input=y_conv, axis=1), tf.nn.softmax(y_conv)[:, 1]],
                                                   feed_dict={X_: Te_X.reshape(Te_X.shape + (1, 1)), Y_: Te_Y,
                                                              keep_prob: DROPOUT_PROB})
                 te_label = np.argmax(Te_Y, 1)
-                te_acc, te_auc = metrics.accuracy_score(te_label, te_label_p), metrics.roc_auc_score(te_label,
-                                                                                                     te_score_p)
+                te_acc = metrics.accuracy_score(te_label, te_label_p)
+                te_auc = metrics.roc_auc_score(label_binarize(te_label, classes=[0,1,2]),label_binarize(te_label_p, classes=[0,1,2]), average ='macro', multi_class='ovo')
+
                 print('epoch %d, testing accuracy: %f, AUC: %f \n' % (e, te_acc, te_auc))
                 test_results.append([te_acc, te_auc])
 
@@ -133,18 +146,21 @@ def run_cnn():
     D = D[np.isnan(D).sum(axis=1) <= 1]
     D = np.nan_to_num(D)
     np.random.shuffle(D)
+    """
     Y = np.zeros([D.shape[0], CLASS])
-    print(D[:, 0])
-    for i, l in enumerate(D[:, 32]):
+    for i, l in enumerate(D[:, 40]):
         print(i, l)
         Y[i, int(l)] = 1.0
+    """
+    Y = D[:, 40]
+    Y = label_binarize(Y, classes=[0,1,2])
 
     test_size = int(D.shape[0] * TEST_PERCENTAGE)
     print('\n\n domain: %s ' % EXP_DATA)
     print('columns: %d, training samples: %d, testing samples: %d \n\n' % (
         D.shape[1] - 1, D.shape[0] - test_size, test_size))
 
-    print(Y)
+    
     Te_D_X, Te_D_Y = D[0:test_size, 1:], Y[0:test_size]
     Tr_D_X, Tr_D_Y = D[test_size:, 1:], Y[test_size:]
     learn_rep(Tr_X=Tr_D_X, Tr_Y=Tr_D_Y, Te_X=Te_D_X, Te_Y=Te_D_Y, Out_Dir=data_dir)
@@ -155,7 +171,7 @@ def run_cnn():
     np.save(os.path.join(data_dir, 'Te_D_Y'), Te_D_Y)
 
 
-CLASS = 2
+CLASS = 3
 TOP_K = 7
 TEST_PERCENTAGE = 0.3
 DROPOUT_PROB = 0.8
@@ -165,8 +181,8 @@ DROPOUT_PROB = 0.8
 EPOCH_NUM = 1000
 THREAD_NUM = 1
 BATCH_SIZE = 100
-DIR = '/home/juandiri/TFM/TFM/Sample/'
-EXP_DATA = 'LongBeach'
+DIR = '/home/juandiri/TFM/Project/Sample'
+EXP_DATA = 'Hungary'
 run_cnn()
 
 

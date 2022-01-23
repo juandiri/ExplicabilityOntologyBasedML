@@ -7,6 +7,7 @@ import time
 import sys
 
 from sklearn import metrics
+from sklearn.preprocessing import label_binarize
 
 
 '''
@@ -70,15 +71,16 @@ def hard_transfer():
                 tr_label_p, tr_score_p = sess.run([tf.argmax(input=R_y_conv, axis=1), tf.nn.softmax(R_y_conv)[:, 1]],
                                                   feed_dict={R_X_: Tr_R_X, R_keep_prob: DROPOUT_PROB})
                 tr_label = np.argmax(Tr_D_Y, 1)
-                tr_acc, tr_auc = metrics.accuracy_score(tr_label, tr_label_p), metrics.roc_auc_score(tr_label,
-                                                                                                     tr_score_p)
+                tr_acc = metrics.accuracy_score(tr_label, tr_label_p)
+                tr_auc = metrics.roc_auc_score(label_binarize(tr_label, classes=[0,1,2]),label_binarize(tr_label_p, classes=[0,1,2]), average='macro', multi_class='ovo')
                 print('epoch %d, training accuracy: %f, AUC: %f' % (e, tr_acc, tr_auc))
 
                 te_label_p, te_score_p = sess.run([tf.argmax(input=R_y_conv, axis=1), tf.nn.softmax(R_y_conv)[:, 1]],
                                                   feed_dict={R_X_: Te_R_X, R_keep_prob: DROPOUT_PROB})
                 te_label = np.argmax(Te_D_Y, 1)
-                te_acc, te_auc = metrics.accuracy_score(te_label, te_label_p), metrics.roc_auc_score(te_label,
-                                                                                                     te_score_p)
+                te_acc = metrics.accuracy_score(te_label, te_label_p)
+                te_auc = metrics.roc_auc_score(label_binarize(te_label, classes=[0,1,2]),label_binarize(te_label_p, classes=[0,1,2]), average ='macro', multi_class='ovo')
+
                 print('epoch %d, testing accuracy: %f, AUC: %f \n' % (e, te_acc, te_auc))
                 test_results.append([te_acc, te_auc])
     print("time spent: %s seconds\n" % (time.time() - start_time))
@@ -87,10 +89,10 @@ def hard_transfer():
     test_res = np.array(test_results)
     auc_order_index = np.argsort(-test_res[:, 1], axis=0)
     ht_test_res = test_res[auc_order_index][0:TOP_K]
-    np.save(os.path.join(HT_DIR, '%s-%s' % (SD, TD)), ht_test_res)
+    np.save(os.path.join(f"{HT_DIR}/{SD}-{TD}"), ht_test_res)
     ht_gap = np.average(ht_test_res, axis=0) - np.average(local_test_res, axis=0)
     print('testing accuracy gap: %f, AUC gap: %f' % (ht_gap[0], ht_gap[1]))
-    np.save(os.path.join(HT_DIR, '%s-%s-gap' % (SD, TD)), ht_gap)
+    np.save(os.path.join(f"{HT_DIR}/{SD}-{TD}-gap"), ht_gap)
 
 
 '''
@@ -127,16 +129,16 @@ def soft_transfer():
                                                   feed_dict={X_: Tr_D_X.reshape(Tr_D_X.shape + (1, 1)), Y_: Tr_D_Y,
                                                              keep_prob: DROPOUT_PROB})
                 tr_label = np.argmax(Tr_D_Y, 1)
-                tr_acc, tr_auc = metrics.accuracy_score(tr_label, tr_label_p), metrics.roc_auc_score(tr_label,
-                                                                                                     tr_score_p)
+                tr_acc = metrics.accuracy_score(tr_label, tr_label_p)
+                tr_auc = metrics.roc_auc_score(label_binarize(tr_label, classes=[0,1,2]),label_binarize(tr_label_p, classes=[0,1,2]), average='macro', multi_class='ovo')
                 print('epoch %d, training accuracy: %f, AUC: %f' % (e, tr_acc, tr_auc))
 
                 te_label_p, te_score_p = sess.run([tf.argmax(input=y_conv, axis=1), tf.nn.softmax(y_conv)[:, 1]],
                                                   feed_dict={X_: Te_D_X.reshape(Te_D_X.shape + (1, 1)), Y_: Te_D_Y,
                                                              keep_prob: DROPOUT_PROB})
                 te_label = np.argmax(Te_D_Y, 1)
-                te_acc, te_auc = metrics.accuracy_score(te_label, te_label_p), metrics.roc_auc_score(te_label,
-                                                                                                     te_score_p)
+                te_acc = metrics.accuracy_score(te_label, te_label_p)
+                te_auc = metrics.roc_auc_score(label_binarize(te_label, classes=[0,1,2]),label_binarize(te_label_p, classes=[0,1,2]), average ='macro', multi_class='ovo')
                 print('epoch %d, testing accuracy: %f, AUC: %f \n' % (e, te_acc, te_auc))
                 test_results.append([te_acc, te_auc])
     print("time spent: %s seconds\n" % (time.time() - start_time))
@@ -145,13 +147,14 @@ def soft_transfer():
     test_res = np.array(test_results)
     auc_order_index = np.argsort(-test_res[:, 1], axis=0)
     st_test_res = test_res[auc_order_index][0:TOP_K]
-    np.save(os.path.join(ST_DIR, '%s-%s' % (SD, TD)), st_test_res)
+    np.save(f"{ST_DIR}/{SD}-{TD}", st_test_res)
     st_gap = np.average(st_test_res, axis=0) - np.average(local_test_res, axis=0)
     print('testing accuracy gap: %f, AUC gap: %f' % (st_gap[0], st_gap[1]))
-    np.save(os.path.join(ST_DIR, '%s-%s-gap' % (SD, TD)), st_gap)
+    np.save(f"{ST_DIR}/{SD}-{TD}-gap", st_gap)
 
 
 def get_batch(size, e):
+    
     if size % BATCH_SIZE == 0:
         m = size / BATCH_SIZE
         bottom, top = int(e % m * BATCH_SIZE), int(e % m * BATCH_SIZE + BATCH_SIZE)
@@ -165,7 +168,7 @@ def get_batch(size, e):
     return range(bottom, top)
 
 
-CLASS = 2
+CLASS = 3
 TOP_K = 7
 DROPOUT_PROB = 0.8
 
@@ -175,9 +178,10 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 
 ## run one domain transfer for debug in IDE 
-SD = 'Hungary'
-TD = 'Cleveland'
-DIR = '/home/juandiri/TFM/TFM/Sample/'
+
+SD = "Switzerland"
+TD = "LongBeach"
+DIR = '/home/juandiri/TFM/Project/Sample'
 THREAD_NUM = 2
 EPOCH_NUM = 1500
 BATCH_SIZE = 100
@@ -202,13 +206,13 @@ local_test_res = np.load(os.path.join(data_dir, 'local_test_res.npy'))
 if OPTION == 'H':
     print('\n\n##### HARD TRANSFER:  %s  to  %s ####\n\n' % (SD, TD))
     print('hard transfer ...')
-    HT_DIR = os.path.join(DIR, '../HT_Result')
+    HT_DIR = os.path.join(DIR, 'Results/HT_Result')
     if not os.path.exists(HT_DIR):
         os.mkdir(HT_DIR)
     hard_transfer()
 elif OPTION == 'S':
     print('\n\n##### SOFT TRANSFER:  %s  to  %s ####\n\n' % (SD, TD))
-    ST_DIR = os.path.join(DIR, '../ST_Result')
+    ST_DIR = os.path.join(DIR, 'Results/ST_Result')
     if not os.path.exists(ST_DIR):
         os.mkdir(ST_DIR)
     soft_transfer()

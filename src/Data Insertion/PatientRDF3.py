@@ -61,7 +61,7 @@ def main(ontology_file, data_dir, out_folder):
                     uri_sex = hrt['Male']
                 rdf.add((uri_sex, RDF['type'], hrt['Sex']))
                 # Link with patient
-                rdf.add((uri_perinfo, hrt['hasSex'], uri_sex))
+                rdf.add((uri_perinfo, hrt['PersonalInformationContains'], uri_sex))
 
             # Add Chest Pain Type
             if row["cp"] is not None and row["cp"] == row["cp"]:
@@ -124,6 +124,19 @@ def main(ontology_file, data_dir, out_folder):
             uri_ecg = URIRef(hrt + "ecg_patient_" + str(int(row['id'])))
             rdf.add((uri_ecg, RDF['type'], hrt['ExerciseECGReading']))
 
+            ## Add ST Depression
+            if row['restecg'] is not None and row['restecg'] == row['restecg']:
+                if int(row['restecg']) == 0:
+                    uri_st = hrt['STWaveNormality']
+                elif int(row['restecg']) == 1:
+                    uri_st = hrt['STWaveAbnormality']
+                else:
+                    uri_st = hrt['VentricularHypertrophy']
+                rdf.add((uri_st, RDF['type'], hrt['STDepression']))
+                # Link with ECG reading
+                rdf.add((uri_ecg, hrt['ECGcontains'], uri_protocol))
+                
+
             ## Add Exercise Protocol
             if row["proto"] is not None and row["proto"] == row["proto"]:
                 if int(row["proto"]) == 1:
@@ -150,9 +163,9 @@ def main(ontology_file, data_dir, out_folder):
                     uri_protocol = hrt['Bike50kpa/min']
                 else:
                     uri_protocol = hrt['ArmErgometer']
-                rdf.add(uri_protocol, RDF['type'], hrt['ExerciseProtocol'])
-                # Link with Personal Information
-                rdf.add((uri_protocol, hrt['hasExerciseProtocol'], uri_perinfo))
+                rdf.add((uri_protocol, RDF['type'], hrt['ExerciseProtocol']))
+                # Link with ECG reading
+                rdf.add((uri_ecg, hrt['ECGcontains'], uri_protocol))
             
             ## Add Exercise Duration
             if row["thaldur"] is not None and row["thaldur"] == row["thaldur"]:
@@ -247,9 +260,9 @@ def main(ontology_file, data_dir, out_folder):
             ## Add Exercise Resting Heart Rate  
             if row["thalrest"] is not None and row["thalrest"] == row["thalrest"]:
                 try:
-                    uri_exresthrt = hrt[f"exmaxhr_{int(row['thalrest'])}"]
+                    uri_exresthrt = hrt[f"exminhr_{int(row['thalrest'])}"]
                 except:
-                    uri_exresthrt = URIRef(f"{hrt}exmaxhr_{int(row['thalrest'])}")
+                    uri_exresthrt = URIRef(f"{hrt}exminhr_{int(row['thalrest'])}")
                 rdf.add((uri_exresthrt, RDF['type'], hrt['ExerciseRestingHeartRate']))
                 ## Link with ECG reading
                 rdf.add((uri_ecg, hrt['ECGcontains'],uri_exresthrt))
@@ -381,12 +394,31 @@ def main(ontology_file, data_dir, out_folder):
                 ### Link with Coronoary Angiograms
                 rdf.add((uri_ca, hrt['CoronaryAngiogramsContains'],uri_cayr))
 
-            ### Add Heart Diagnosis (target)
-            if row["num"] is not None and row["num"] == row["num"]:
+            ### Add Nummber of Vessels Damaged
+
+            if row["num"] is not None and row['num'] == row['num']:
                 if row["num"] == 0:
+                    uri_vessdmg = hrt['0VesselDamaged']
+                elif row["num"] == 1:
+                    uri_vessdmg = hrt['1VesselDamaged']
+                elif row["num"] == 2:
+                    uri_vessdmg = hrt['2VesselDamaged']
+                elif row["num"] == 3:
+                    uri_vessdmg = hrt['3VesselDamaged']
+                else:
+                    uri_vessdmg = hrt['1VesselDamaged']
+                
+                rdf.add((uri_ca, hrt['CoronaryAngiogramsContains'], uri_vessdmg))
+            
+            ### Add Heart Diagnosis (target)
+            if row["target"] is not None and row["target"] == row["target"]:
+                if row["target"] == 0:
+                    uri_diagnosis = hrt['PossiblyHealthy']
+                elif row["target"] == 1:
                     uri_diagnosis = hrt['LessThan50DiameterNarrowing']
                 else: 
                     uri_diagnosis = hrt['MoreThan50DiameterNarrowing']
+
                 rdf.add((uri_diagnosis, RDF['type'], hrt['HeartDiseaseDiagnosis']))
                 ### Link with Coronoary Angiograms
                 rdf.add((uri_ca, hrt['CoronaryAngiogramsContains'], uri_diagnosis))

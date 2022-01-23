@@ -1,0 +1,27 @@
+Out: pain_loc, pain_exer, pain_caden, smoke, cigs, years, dm, thalach, rldv5e, exerckm, restef, restwm, exerwm, thalsev, earlobe,
+cmo, cday, cxmain, om1, rcaprox, cathef, junk, famhist, thalpul, laddist, diag, diag.1, ramus, om2
+
+
+In: id, ccf, age, sex,
+LongBeach
+['id', 'ccf', 'age', 'sex', 'pain_loc', 'pain_exer', 'cp', 'restecg', 'cday', 'cyr', 'num', 'lmt', 'ladprox', 'laddist', 'diag', 'cxmain', 'ramus', 'om1', 'name']
+090409
+Hungary
+['id', 'ccf', 'age', 'sex', 'pain_loc', 'pain_exer', 'rel_rest', 'cp', 'ekgmo', 'ekgday', 'ekgyr', 'oldpeak', 'rldv5e', 'cmo', 'cday', 'cyr', 'num', 'lvx1', 'lvx2', 'lvx3', 'lvx4', 'lvf', 'name']
+
+Cleveland
+['id', 'ccf', 'age', 'sex', 'cp', 'trestbps', 'htn', 'chol', 'fbs', 'famhist', 'restecg', 'ekgmo', 'ekgday', 'ekgyr', 'proto', 'thaldur', 'met', 'thalach', 'thalrest', 'tpeakbps', 
+'tpeakbpd', 'dummy', 'trestbpd', 'exang', 'xhypo', 'oldpeak', 'slope', 'rldv5e', 'cmo', 'cday', 'cyr', 'num', 'lmt', 'ladprox', 'laddist', 'cxmain', 'om1', 'rcaprox', 'rcadist', 'lvx1', 
+'lvx2', 'lvx3', 'lvx4', 'lvf', 'name']
+
+Switzerland
+['id', 'ccf', 'age', 'sex', 'pain_loc', 'pain_exer', 'rel_rest', 'cp', 'chol', 'num', 'lmt', 'ladprox', 'laddist', 'diag', 'cxmain', 'ramus', 'om1', 'om2', 'rcaprox', 'rcadist', 'name']
+
+
+IN:
+id, ccf, age, sex, cp, restecg, name
+
+POSSIBLE:
+rel_rest, trestbps, htn, chol, fbs, ekgmo, ekgday, ekgyr, dig, prop, nitr, pro, diuretic
+thaldur, thalach, thalrest, tpeakbps, tpeakbpd, dummy, exang,xhypo, oldpeak,rldv5e,cmo,
+cday, cyr, lmt, ladprox, laddist, cxmain, lvx1, lvx2, lvx3, lvx4, lvf, pain_loc, pain_exer

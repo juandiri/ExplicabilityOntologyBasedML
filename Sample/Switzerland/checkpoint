@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/juandiri/TFM/Project/Sample/Switzerland/CNN.ckpt"
+all_model_checkpoint_paths: "/home/juandiri/TFM/Project/Sample/Switzerland/CNN.ckpt"

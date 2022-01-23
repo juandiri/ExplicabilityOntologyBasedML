@@ -1,6 +1,6 @@
 import os
 
-ENT_DIR = '/home/juandiri/TFM/TFM/RDFInsertions/3/Entailments'
+ENT_DIR = '/home/juandiri/TFM/Project/RDFInsertions/4/Entailments'
 sigma, kappa, tau = 0.99, 1.0, 0.8
 
 doms = ['Cleveland', 'Hungary', 'LongBeach']
@@ -44,9 +44,13 @@ for i, dom in enumerate(doms):
     eff_f = open(EFF_F, 'r')
     eff = {}
     for line in eff_f.readlines():
-        tmp = line.strip().split(':')
-        tmp2 = tmp[1].split(',')
-        eff[tmp[0]] = float(tmp2[1])
+        try:
+            tmp = line.strip().split(':')
+            tmp2 = tmp[1].split(',')
+            eff[tmp[0]] = float(tmp2[1])
+        except:
+            pass
+
     eff_f.close()
     for i, g in enumerate(eff.keys()):
         if len(g.split(',')) == 2:

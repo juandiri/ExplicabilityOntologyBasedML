@@ -10,8 +10,9 @@ from tqdm import tqdm
 
 def main():
 
-    data_dir = "/home/juandiri/TFM/TFM/ProcessedData/V2/Switzerland.csv"
-    out_dir = "/home/juandiri/TFM/TFM/Sample/Switzerland"
+    data_dir = "/home/juandiri/TFM/Project/ProcessedData/V2/LongBeach.csv"
+    save_dir = "/home/juandiri/TFM/Project/ProcessedData/V3/"
+    out_dir = "/home/juandiri/TFM/Project/Sample/LongBeach"
 
     # Dataframe to store the data
     features = ['num','id','age','sex','cp','trestbps','htn','chol','fbs','restecg','ekgmo','ekgday','ekgyr','dig','prop','nitr','pro','diuretic','proto','thaldur','met','thalach','thalrest','tpeakbps','tpeakbpd','trestbpd','exang','xhypo','oldpeak','rldv5e','cmo','cday','cyr', 'lmt','ladprox','laddist','diag','cxmain','rcaprox','rcadist']
@@ -20,9 +21,16 @@ def main():
     try:
         dataframe = pd.read_csv(data_dir)
         matrix_dataframe = dataframe
-        matrix_dataframe['num'] = matrix_dataframe['num'].replace([2,3,4], 1)
+        conditions = [
+            (matrix_dataframe['num'] == 0),
+            (matrix_dataframe['num'] == 1),
+            (matrix_dataframe['num'] > 1)
+        ]
+        values = [0, 1, 2]
+        matrix_dataframe['target'] = np.select(conditions, values)
         matrix_dataframe = matrix_dataframe.replace(np.NaN, -9)
         matrix_dataframe.to_csv(f"{out_dir}/D.csv", index=False)
+        matrix_dataframe.to_csv(f"{save_dir}/{out_dir.split('/')[-1]}.csv", index=False)    
 
     except Exception as e:
         raise e
